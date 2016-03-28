@@ -1,0 +1,10 @@
+<header>
+    <nav>
+        <ul class="nav nav-pills">
+            <c:forEach items="${pageLinks}" var="link">
+                <c:set var="isActive" value="${page eq link.path}"/>
+                <li class="${isActive ? 'active' : ''}"><a href="${contextPath}${link.path}">${link.label}</a></li>
+            </c:forEach>
+        </ul>
+    </nav>
+</header>

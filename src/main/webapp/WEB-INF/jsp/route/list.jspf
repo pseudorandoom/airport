@@ -1,0 +1,52 @@
+<section class="panel panel-default">
+    <div class="panel-heading">Routes List</div>
+    <c:choose>
+        <c:when test="${empty routes}">
+            <div class="panel-body">
+                No routes to display at the moment
+            </div>
+        </c:when>
+        <c:otherwise>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Duration (minutes)</th>
+                        <th>Destination</th>
+                        <th>Departure</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${routes}" var="route">
+                        <tr>
+                            <td>${route.id}</td>
+                            <td>${route.duration}</td>
+                            <td>${route.destination}</td>
+                            <td>${route.departure}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:otherwise>
+    </c:choose>
+</section>
+<section class="panel panel-default">
+    <div class="panel-heading">Route Creation</div>
+    <div class="panel-body">
+        <form:form method="POST" modelAttribute="route" action="${contextPath}/routes">
+            <div class="input-group">
+                <form:label path="duration">Duration (minutes)</form:label>
+                <form:input path="duration" />
+            </div>
+            <div class="input-group">
+                <form:label path="destination">Destination</form:label>
+                <form:input path="destination" />
+            </div>
+            <div class="input-group">
+                <form:label path="departure">Departure</form:label>
+                <form:input path="departure" />
+            </div>
+            <button type="submit">Save</button>
+        </form:form>
+    </div>
+</section>

@@ -1,0 +1,52 @@
+<section class="panel panel-default">
+    <div class="panel-heading">Planes List</div>
+    <c:choose>
+        <c:when test="${empty planes}">
+            <div class="panel-body">
+                No planes to display at the moment
+            </div>
+        </c:when>
+        <c:otherwise>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Capacity</th>
+                        <th>Model</th>
+                        <th>Producer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${planes}" var="plane">
+                        <tr>
+                            <td>${plane.id}</td>
+                            <td>${plane.capacity}</td>
+                            <td>${plane.model}</td>
+                            <td>${plane.producer}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:otherwise>
+    </c:choose>
+</section>
+<section class="panel panel-default">
+    <div class="panel-heading">Plane Creation</div>
+    <div class="panel-body">
+        <form:form method="POST" modelAttribute="plane" action="${contextPath}/planes">
+            <div class="input-group">
+                <form:label path="capacity">Capacity</form:label>
+                <form:input path="capacity" />
+            </div>
+            <div class="input-group">
+                <form:label path="model">Model</form:label>
+                <form:input path="model" />
+            </div>
+            <div class="input-group">
+                <form:label path="producer">Producer</form:label>
+                <form:input path="producer" />
+            </div>
+            <button type="submit">Save</button>
+        </form:form>
+    </div>
+</section>

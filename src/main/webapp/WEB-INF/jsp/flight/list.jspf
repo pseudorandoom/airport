@@ -1,0 +1,76 @@
+<section class="panel panel-default">
+    <div class="panel-heading">Passengers List</div>
+    <c:choose>
+        <c:when test="${empty flights}">
+            <div class="panel-body">
+                No flights to display at the moment
+            </div>
+        </c:when>
+        <c:otherwise>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Departure time</th>
+                        <th>Route</th>
+                        <th>Plane</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${flights}" var="flight">
+                        <tr>
+                            <td>${flight.id}</td>
+                            <td><fmt:formatDate value="${flight.departureTime}" pattern="yyyy/MM/dd-hh:mm"/></td>
+                            <td>${flight.route.id} - ${flight.route.destination}</td>
+                            <td>${flight.plane.id} - ${flight.plane.model}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:otherwise>
+    </c:choose>
+</section>
+<section class="panel panel-default">
+    <div class="panel-heading">Passenger Creation</div>
+    <div class="panel-body">
+        <form:form method="POST" modelAttribute="flightHelper" action="${contextPath}/flights">
+            <div class="input-group">
+                <form:label path="departureTimeHour">Hour</form:label>
+                <form:select path="departureTimeHour">
+                    <form:options items="${hourOptions}"/>
+                </form:select>
+            </div>
+            <div class="input-group">
+                <form:label path="departureTimeDay">Day</form:label>
+                <form:select path="departureTimeDay">
+                    <form:options items="${dayOptions}"/>
+                </form:select>
+            </div>
+            <div class="input-group">
+                <form:label path="departureTimeMonth">Month</form:label>
+                <form:select path="departureTimeMonth">
+                    <form:options items="${monthOptions}"/>
+                </form:select>
+            </div>
+            <div class="input-group">
+                <form:label path="departureTimeYear">Year</form:label>
+                <form:select path="departureTimeYear">
+                    <form:options items="${yearOptions}"/>
+                </form:select>
+            </div>
+            <div class="input-group">
+                <form:label path="routeId">Route</form:label>
+                <form:select path="routeId">
+                    <form:options items="${routeIds}"/>
+                </form:select>
+            </div>
+            <div class="input-group">
+                <form:label path="planeId">Plane</form:label>
+                <form:select path="planeId">
+                    <form:options items="${planeIds}"/>
+                </form:select>
+            </div>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form:form>
+    </div>
+</section>
